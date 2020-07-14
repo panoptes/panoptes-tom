@@ -1,0 +1,74 @@
+{% extends 'tom_common/base.html' %}
+
+{% block title %} Observations {% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+        <div class="col-md-8">
+                <h2 class="text-center">Remote Observation Requests</h2>
+        </div>
+</div>
+
+
+{% if request.user == u %}
+
+<div class="col-md-8">
+        <div class="card">
+                <div class="card-header">
+                        Remote Observers
+                </div>
+
+                {% for observer in remote_observer_list %}
+                <a href="{{ observer.user.profile.get_absolute_url }}">{{ observer.user.username }}</a>
+                {% endfor %}
+        </div>
+
+</div>
+
+<div class="col-md-4">
+        <div class="float-right">
+                <div class="card">
+                        <div class="card-header">
+                                Sent Observation Requests
+                        </div>
+                        <ul>
+                                {% for s_request in sent_obs_requests %}
+                                <li>{{ s_request.to_user.username }}</li>
+                                {% endfor %}
+                        </ul>
+                </div>
+                <br />
+                <div class="card">
+                        <div class="card-header">
+                                Received Observation Requests
+                        </div>
+                        {% for r_request in rec_obs_requests %}
+                        <p><a href="{{ r_request.from_user.profile.get_absolute_url }}">{{ r_request.from_user.username }}</a>
+                        </p>
+                        <small><a class='btn btn-primary'
+                                        href="{% url 'remoterequests:accept-obs-request' r_request.from_user.id %}">Accept</a></small>
+                        <small><a class='btn btn-warning'
+                                        href="{% url 'remoterequests:delete-obs-request' r_request.from_user.id %}">Ignore</a></small>
+                        {% endfor %}
+                </div>
+        </div>
+
+
+
+        {% else %}
+
+        {% if button_status == 'not_remote_observer' %}
+        <small><a class='btn btn-primary' href="{% url 'remoterequests:send-obs-request' u.id %}">Request Remote
+                        Observation</a></small>
+        {% elif button_status == 'observation_request_sent' %}
+        <small><a class="btn btn-warning" href="{% url 'remoterequests:cancel-obs-request' u.id %}">Cancel
+                        Request</a></small>
+        {% endif %}
+
+        {% endif %}
+
+</div>
+
+{% endblock %}

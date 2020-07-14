@@ -1,0 +1,38 @@
+{% extends 'tom_common/base.html' %}
+{% load static targets_extras observation_extras dataproduct_extras tom_common_extras %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="text-center">PANOPTES Observation Portal</h1>
+        <p class="text-center"><img src="{% static 'img/panoptes.png' %}" class="img-fluid mx-auto"></p>
+
+        <br />
+
+        <p class="text-center" ; style="font-size:32px">
+            A portal for viewing and scheduling observations. </p>
+        <p class="text-center" ; style="font-size:20px ; font-weight: bold;"> To view targets and data, please log in.
+            <br />Username, pwd: observer, panoptes</p>
+        <p class="text-center" ; style="font-size:20px">Github <a
+                href="https://github.com/jlibermann/panoptes-tom">here</a>.
+
+        </p>
+
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Latest Comments
+            </div>
+            {% recent_comments %}
+        </div>
+        <br />
+        <div class="card">
+            <div class="card-header">
+                Latest Targets
+            </div>
+            {% recent_targets %}
+        </div>
+    </div>
+    {% endblock %}

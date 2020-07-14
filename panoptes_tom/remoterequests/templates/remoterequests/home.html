@@ -1,0 +1,11 @@
+{% extends 'tom_common/base.html' %}
+
+{% block content %}
+
+<ul>
+    {% for user_p in remote_observer_list %}
+    <li><a href="{{ user_p.get_absolute_url }}">{{ user_p }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
