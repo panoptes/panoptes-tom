@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from .models import Profile, ObservationRequest
 from django.contrib.auth.models import User
 from django.urls import reverse, reverse_lazy
@@ -6,32 +6,23 @@ from django.urls import reverse, reverse_lazy
 User = User
 
 
-def user_info(request, id=None):
+def user_info(request, pk):
     """This returns profile info on a given user.
 
     Args:
         request : A request to view the profile info.
-        id (int): An identifier for a particular user. Defaults to None.
+       pk: A unique identifier corresponding with the given profile.
 
     Returns:
        The profile info page.
     """
-    if id:
-        user = User.objects.get(id=id)
-    else:
-        user = request.user
+    try:
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        user = None
+
     args = {"user": user}
     return render(request, "user/user_profile.html", args)
-
-
-def observers_list(request):
-    """Observers List
-
-    Returns a list of all the observers excluding ourself.
-    """
-    observers = Profile.objects.exclude(user=request.user)
-    context = {"observers": observers}
-    return render(request, "remoterequests/home.html", context)
 
 
 def send_obs_request(request, id):
@@ -103,6 +94,10 @@ def profile_view(request, slug):
 
     remote_observers = p.remote_observers.all()
 
+    all_users = Profile.objects.exclude(
+        user=request.user
+    )  # Returns a list of all the observers excluding ourself.
+
     # is this user a remote observer on our telescope
     button_status = "none"
     if p not in request.user.profile.remote_observers.all():
@@ -121,6 +116,7 @@ def profile_view(request, slug):
         "remote_observer_list": remote_observers,
         "sent_obs_requests": sent_obs_requests,
         "rec_obs_requests": rec_obs_requests,
+        "all_users": all_users,
     }
 
     return render(request, "remoterequests/profile.html", context)
