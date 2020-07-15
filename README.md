@@ -2,20 +2,20 @@
 
 A target and observation manager for [Project PANOPTES](https://github.com/panoptes) built with the [TOM Toolkit](https://tom-toolkit.readthedocs.io/en/stable/index.html).
 
-# Deployment
+## Deployment
 
 A prototype observation manager site can be found [here](https://panoptes-tom.herokuapp.com/).
 
-# Development
+## Development
 
-To develop, clone the repo and cd into the project's root directory.
+To develop, clone the repo and cd into the project's root directory:
 
 ```shell
 $ git clone https://github.com/jlibermann/panoptes-tom.git
 $ cd path-to-file/panoptes-tom
 ```
 
-Next, install the necessary packages.
+Next, install the necessary packages:
 ```shell
 $ pip install -r requirements.txt
 ```
