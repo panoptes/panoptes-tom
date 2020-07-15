@@ -21,6 +21,10 @@ from tom_targets.models import (
     REQUIRED_NON_SIDEREAL_FIELDS_PER_SCHEME,
 )
 
+from astropy.utils.iers import conf
+
+conf.auto_max_age = None
+
 
 def make_request(*args, **kwargs):
     response = requests.request(*args, **kwargs)
