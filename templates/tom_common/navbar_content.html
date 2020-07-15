@@ -39,10 +39,13 @@ For customization instructions, see tom_common/base.html
             <a class="nav-link" href="{% url 'tom_observations:strategy-list' %}" style="color:black">Observation
                 Strategies</a>
         </li>
+        {% if user.is_authenticated %}
         <li class="nav-item {% if request.resolver_match.namespace == 'remoterequests' %}active{% endif %}">
-            <a class="nav-link" href="{% url 'remoterequests:profile-view' slug %}" style="color:black">Remote
+            <a class="nav-link" href="{% url 'remoterequests:profile-view' user.profile.slug %}"
+                style="color:black">Remote
                 Requests</a>
         </li>
+        {% endif %}
 
     </ul>
 </li>
