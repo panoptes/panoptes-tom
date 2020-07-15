@@ -17,5 +17,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path("", include("tom_common.urls")),
-    path("", include("panoptes_tom.remoterequests.urls")),
+    path("", include("panoptes_tom.remoterequests.urls", namespace="remoterequests")),
 ]

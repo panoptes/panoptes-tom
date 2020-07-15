@@ -17,12 +17,32 @@
         <div class="col-md-8">
                 <div class="card">
                         <div class="card-header">
+                                All Users
+                        </div>
+                        <ul>
+                                {% for u in all_users %}
+                                <li>
+                                        <p><a href="{% url 'remoterequests:user-profile' u.pk %}">{{ u.user.username }}</a>
+                                        </p>
+
+                                </li>
+                                {% endfor %}
+                        </ul>
+                </div>
+
+                <br />
+
+
+
+
+                <div class="card">
+                        <div class="card-header">
                                 Remote Observers
                         </div>
                         <ul>
                                 {% for observer in remote_observer_list %}
                                 <li>
-                                        <p><a href="{% url 'remoterequests:user-profile' %}">{{ observer.user.username }}</a>
+                                        <p><a href="{% url 'remoterequests:user-profile' observer.pk %}">{{ observer.user.username }}</a>
                                         </p>
 
                                 </li>
