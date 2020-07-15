@@ -8,11 +8,11 @@ A prototype observation manager site can be found [here](https://panoptes-tom.he
 
 ## Development
 
-To develop, clone the repo and cd into the project's root directory:
+To develop, clone the repo and activate a virtual environment for managing the `panoptes-tom` packages:
 
 ```shell
-$ git clone https://github.com/jlibermann/panoptes-tom.git
-$ cd path-to-file/panoptes-tom
+$ python3 -m venv tom_env/
+$ source tom_env/bin/activate
 ```
 
 Next, install the necessary packages:
@@ -21,8 +21,9 @@ $ pip install -r requirements.txt
 ```
 
 
-Then, run the necessary database migrations:
+Then, cd into the root project directory and run the necessary database migrations:
 ```shell
+$ cd path-to-file/panoptes-tom
 $ ./manage.py makemigrations
 $ ./manage.py migrate
 ```
