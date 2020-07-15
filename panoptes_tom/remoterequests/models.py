@@ -14,15 +14,15 @@ class Profile(models.Model):
     """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    slug = models.SlugField()
-    remote_observers = models.ManyToManyField("Profile", blank=True)
+    slug = models.SlugField(unique=True, null=False)
+    remote_observers = models.ManyToManyField("Profile", blank=True,)
 
     def __str__(self):
         return str(self.user.username)
 
     def get_absolute_url(self):
         return reverse(
-            "remoterequests:profile_view", args=[str(self.slug)]
+            "remoterequests:profile-view", kwargs={"slug": self.slug}
         )  # TODO: Reevaluate this later
 
     def save(self, *args, **kwargs):

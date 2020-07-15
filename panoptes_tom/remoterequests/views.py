@@ -6,6 +6,24 @@ from django.urls import reverse, reverse_lazy
 User = User
 
 
+def user_info(request, id=None):
+    """This returns profile info on a given user.
+
+    Args:
+        request : A request to view the profile info.
+        id (int): An identifier for a particular user. Defaults to None.
+
+    Returns:
+       The profile info page.
+    """
+    if id:
+        user = User.objects.get(id=id)
+    else:
+        user = request.user
+    args = {"user": user}
+    return render(request, "user/user_profile.html", args)
+
+
 def observers_list(request):
     """Observers List
 
@@ -32,7 +50,7 @@ def send_obs_request(request, id):
         ob_req, created = ObservationRequest.objects.get_or_create(
             from_user=request.user, to_user=user
         )
-        return redirect("remoterequests:profile-view")
+        return redirect("remoterequests:profile-view", request.user.profile.slug)
 
 
 def cancel_obs_request(request, id):
@@ -46,7 +64,7 @@ def cancel_obs_request(request, id):
             from_user=request.user, to_user=user
         ).first()  # .first() gets the only item in the list
         ob_req.delete()
-        return redirect("remoterequests:profile-view")
+        return redirect("remoterequests:profile-view", user.profile.slug)
 
 
 def accept_obs_request(request, id):
@@ -58,7 +76,7 @@ def accept_obs_request(request, id):
     # TODO: remote_observers.add() is just a placeholder. Eventually, we want a system where a "virtual" telescope request gets sent to the cloud.
     user2.profile.remote_observers.add(user1.profile)
     ob_req.delete()
-    return redirect("remoterequests:profile-view")
+    return redirect("remoterequests:profile-view", user1.profile.slug)
 
 
 def delete_obs_request(request, id):
@@ -77,6 +95,7 @@ def profile_view(request, slug):
 
     Displays profile information such as sent and received observation requests.
     """
+
     p = Profile.objects.filter(slug=slug).first()
     u = p.user
     sent_obs_requests = ObservationRequest.objects.filter(from_user=p.user)
