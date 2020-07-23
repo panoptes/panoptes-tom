@@ -71,7 +71,12 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
     # and a code.
 
     SITES = {
-        "Mauna Loa": {"sitecode": "mau", "latitude": 19.54, "longitude": -155.58, "elevation": 3400}
+        "Mt. Wilson": {
+            "sitecode": "wil",
+            "latitude": 34.22,
+            "longitude": -118.06,
+            "elevation": 1700,
+        }
     }
 
     def data_products(self, observation_id, product_id=None):
