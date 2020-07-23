@@ -10,30 +10,34 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
+# from djangae.settings_base import *
+from dotenv import load_dotenv
 
 import os
 import tempfile
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
-
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(" ")
+DEBUG = int(os.getenv("DEBUG", default=0))
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # "djangae",
+    # "djangae.tasks",
+    # "djangae.contrib.security",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -61,6 +65,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
+    #  "djangae.contrib.security.middleware.AppEngineSecurityMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -99,12 +104,16 @@ WSGI_APPLICATION = "panoptes_tom.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-GOOGLE_CLOUD_CONFIG_KEY = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
+GOOGLE_CLOUD_CONFIG_KEY = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("BASE_DIR", "django.db.backends.sqlite3"),
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "ENGINE": os.getenv("SQL_ENGINE"),
+        "NAME": os.getenv("SQL_DATABASE"),
+        "USER": os.getenv("SQL_USER"),
+        "PASSWORD": os.getenv("SQL_PASSWORD"),
+        "PORT": os.getenv("SQL_PORT"),
+        "HOST": "127.0.0.1",
     }
 }
 
@@ -148,7 +157,7 @@ DATE_FORMAT = "Y-m-d"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = "/static/"
+STATIC_URL = "https://storage.googleapis.com/tom-static-files/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 MEDIA_ROOT = os.path.join(BASE_DIR, "data")
