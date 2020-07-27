@@ -226,7 +226,7 @@ TOM_FACILITY_CLASSES = [
     # "tom_observations.facilities.gemini.GEMFacility",
     # "tom_observations.facilities.soar.SOARFacility",
     # "tom_observations.facilities.lt.LTFacility",
-    "panoptes_tom.facilities.pan012.PanoptesObservationFacility",
+    "panoptes_tom.tom_observations.facilities.pan012.PanoptesObservationFacility",
 ]
 
 TOM_ALERT_CLASSES = [
