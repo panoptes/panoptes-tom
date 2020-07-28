@@ -29,7 +29,7 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.getenv("DEBUG", default=0))
+DEBUG = True
 
 
 # Application definition
@@ -113,7 +113,7 @@ DATABASES = {
         "USER": os.getenv("SQL_USER"),
         "PASSWORD": os.getenv("SQL_PASSWORD"),
         "PORT": os.getenv("SQL_PORT"),
-        "HOST": "127.0.0.1",
+        "HOST": os.getenv("DJANGO_HOST"),
     }
 }
 
@@ -166,8 +166,17 @@ MEDIA_URL = "/data/"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {"console": {"class": "logging.StreamHandler",}},
-    "loggers": {"": {"handlers": ["console"], "level": "INFO"}},
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "debug.log"),
+        },
+    },
+    "loggers": {
+        "django": {"handlers": ["file"], "level": "DEBUG", "propagate": True,},
+        "django.db.backends": {"level": "DEBUG", "handlers": ["console"],},
+    },
 }
 
 # Caching

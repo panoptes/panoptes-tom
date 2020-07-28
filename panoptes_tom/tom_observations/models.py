@@ -4,7 +4,6 @@ import json
 from tom_targets.models import Target
 from tom_observations.facility import get_service_class
 from tom_common.hooks import run_hook
-from .facilities.pan012.PanoptesObservationFacilityForm import build_target_fields
 
 
 class ObservationRecord(models.Model):
@@ -59,8 +58,6 @@ class ObservationRecord(models.Model):
     )
     exp_set_size = models.IntegerField(min_value=1)
     priority = models.FloatField(min_value=0)
-
-    target_fields = ObservationRecord(**build_target_fields())
 
     class Meta:
         ordering = ("-created",)
