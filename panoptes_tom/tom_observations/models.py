@@ -60,7 +60,6 @@ class ObservationRecord(models.Model):
     exp_set_size = models.IntegerField(min_value=1)
     priority = models.FloatField(min_value=0)
 
-    target_fields = ObservationRecord(**build_target_fields())
 
     class Meta:
         ordering = ("-created",)

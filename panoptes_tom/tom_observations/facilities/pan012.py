@@ -62,21 +62,6 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
             Div(Div("period", css_class="col"), css_class="form-row"),
         )
 
-    def _build_target_fields(self):
-        target = Target.objects.get(pk=self.cleaned_data["target_id"])
-        target_fields = {
-            "name": target.name,
-        }
-
-        target_fields["type"] = "ICRS"
-        target_fields["field_ra"] = target.ra
-        target_fields["field_dec"] = target.dec
-        # target_fields['proper_motion_ra'] = target.pm_ra
-        # target_fields['proper_motion_dec'] = target.pm_dec
-        # target_fields['epoch'] = target.epoch
-
-        return target_fields
-
     def observation_payload(self):
         """
         This method is called to extract the data from the form into a dictionary that
@@ -87,10 +72,7 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
 
         return {
             "target_id": target.id,
-            # "field_ra": target.ra,
-            # "field_dec": target.dec,
             "parameters": self.serialize_parameters(),
-            "target_fields": self._build_target_fields(),
         }
 
 

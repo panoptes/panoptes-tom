@@ -29,15 +29,12 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.getenv("DEBUG", default=0))
+DEBUG = int(os.getenv("DEBUG", default=1))
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # "djangae",
-    # "djangae.tasks",
-    # "djangae.contrib.security",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -65,7 +62,6 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
-    #  "djangae.contrib.security.middleware.AppEngineSecurityMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -166,8 +162,17 @@ MEDIA_URL = "/data/"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {"console": {"class": "logging.StreamHandler",}},
-    "loggers": {"": {"handlers": ["console"], "level": "INFO"}},
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "debug.log"),
+        },
+    },
+    "loggers": {
+        "django": {"handlers": ["file"], "level": "DEBUG", "propagate": True,},
+        "django.db.backends": {"level": "DEBUG", "handlers": ["console"],},
+    },
 }
 
 # Caching
