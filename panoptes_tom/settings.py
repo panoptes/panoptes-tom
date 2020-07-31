@@ -189,24 +189,6 @@ CACHES = {
 # TOM Specific configuration
 TARGET_TYPE = "SIDEREAL"
 
-FACILITIES = {
-    "LCO": {"portal_url": "https://observe.lco.global", "api_key": "",},
-    "GEM": {
-        "portal_url": {"GS": "https://139.229.34.15:8443", "GN": "https://128.171.88.221:8443",},
-        "api_key": {"GS": "", "GN": "",},
-        "user_email": "",
-        "programs": {
-            "GS-YYYYS-T-NNN": {
-                "MM": "Std: Some descriptive text",
-                "NN": "Rap: Some descriptive text",
-            },
-            "GN-YYYYS-T-NNN": {
-                "QQ": "Std: Some descriptive text",
-                "PP": "Rap: Some descriptive text",
-            },
-        },
-    },
-}
 
 # Define the valid data product types for your TOM. Be careful when removing items, as previously valid types will no
 # longer be valid, and may cause issues unless the offending records are modified.
@@ -228,23 +210,8 @@ TOM_LATEX_PROCESSORS = {
 }
 
 TOM_FACILITY_CLASSES = [
-    # "tom_observations.facilities.lco.LCOFacility",
-    # "tom_observations.facilities.gemini.GEMFacility",
-    # "tom_observations.facilities.soar.SOARFacility",
-    # "tom_observations.facilities.lt.LTFacility",
     "panoptes_tom.tom_observations.facilities.pan012.PanoptesObservationFacility",
 ]
-
-TOM_ALERT_CLASSES = [
-    "tom_alerts.brokers.mars.MARSBroker",
-    "tom_alerts.brokers.lasair.LasairBroker",
-    "tom_alerts.brokers.scout.ScoutBroker",
-    "tom_alerts.brokers.tns.TNSBroker",
-    "tom_alerts.brokers.antares.ANTARESBroker",
-    "tom_alerts.brokers.gaia.GaiaBroker",
-]
-
-ALERT_CREDENTIALS = {"TNS": {"api_key": ""}}
 
 # Define extra target fields here. Types can be any of "number", "string", "boolean" or "datetime"
 # See https://tomtoolkit.github.io/docs/target_fields for documentation on this feature
