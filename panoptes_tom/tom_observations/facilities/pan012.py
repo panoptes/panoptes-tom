@@ -22,6 +22,7 @@ from tom_targets.models import (
 )
 
 from astropy.utils.iers import conf
+import json
 
 conf.auto_max_age = None
 
@@ -59,7 +60,6 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
                 Div("min_nexp", "exp_time", "priority", "exp_set_size", css_class="col",),
                 css_class="form-row",
             ),
-            Div(Div("period", css_class="col"), css_class="form-row"),
         )
 
     def observation_payload(self):
@@ -69,11 +69,20 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
         the form into a json string.
         """
         target = Target.objects.get(pk=self.cleaned_data["target_id"])
-
-        return {
+        observation_payload = {
             "target_id": target.id,
             "parameters": self.serialize_parameters(),
         }
+
+        # params comes as JSON string, so turn it back into a dictionary
+        obs_params = json.loads(observation_payload["parameters"])
+        obs_params["field_ra"] = target.ra
+        obs_params["field_dec"] = target.dec
+
+        # Convert params back into a JSON string
+        observation_payload["parameters"] = json.dumps(obs_params)
+
+        return observation_payload
 
 
 class PanoptesObservationFacility(BaseRoboticObservationFacility):
@@ -103,9 +112,9 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
     #     """Get the telescope_states from the LCO API endpoint and simply
     #     transform the returned JSON into the following dictionary hierarchy
     #     for use by the facility_status.html template partial.
-    #     facility_dict = {'code': 'LCO', 'sites': [ site_dict, ... ]}
-    #     site_dict = {'code': 'XYZ', 'telescopes': [ telescope_dict, ... ]}
-    #     telescope_dict = {'code': 'XYZ', 'status': 'AVAILABILITY'}
+    #     facilityerobservation_payload = {'code': 'LCO', 'sites': [ siteerobservation_payload, ... ]}
+    #     siteerobservation_payload = {'code': 'XYZ', 'telescopes': [ telescopeerobservation_payload, ... ]}
+    #     telescopeerobservation_payload = {'code': 'XYZ', 'status': 'AVAILABILITY'}
     #     Here's an example of the returned dictionary:
     #     literal_facility_status_example = {
     #         'code': 'LCO',
@@ -134,7 +143,7 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
     #             }
     #         ]
     #     }
-    #     :return: facility_dict
+    #     :return: facilityerobservation_payload
     #     """
     #     # make the request to the LCO API for the telescope_states
     #     response = make_request(
@@ -187,6 +196,7 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
         return ["IN_PROGRESS", "COMPLETED"]
 
     def submit_observation(self, observation_payload):
+
         print(observation_payload)
 
         return [1]

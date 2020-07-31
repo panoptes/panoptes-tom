@@ -10,7 +10,6 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-# from djangae.settings_base import *
 from dotenv import load_dotenv
 
 import os
@@ -18,7 +17,7 @@ import tempfile
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
@@ -30,6 +29,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.getenv("DEBUG", default=1))
+
+DJANGO_SETTINGS_MODULE = os.getenv("DJANGO_SETTINGS_MODULE")
 
 
 # Application definition
