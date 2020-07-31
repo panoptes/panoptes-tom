@@ -52,6 +52,9 @@ class ObservationRecord(models.Model):
     scheduled_end = models.DateTimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
+    # TODO: Find out how to add additional params to existing model.
+
     # min_nexp = models.IntegerField(min_value=1)
     # exp_time = models.FloatField(
     #     min_value=5, widget=models.TextInput(attrs={"placeholder": "Seconds"})

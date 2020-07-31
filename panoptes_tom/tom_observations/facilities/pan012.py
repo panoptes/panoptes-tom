@@ -112,9 +112,9 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
     #     """Get the telescope_states from the LCO API endpoint and simply
     #     transform the returned JSON into the following dictionary hierarchy
     #     for use by the facility_status.html template partial.
-    #     facilityerobservation_payload = {'code': 'LCO', 'sites': [ siteerobservation_payload, ... ]}
-    #     siteerobservation_payload = {'code': 'XYZ', 'telescopes': [ telescopeerobservation_payload, ... ]}
-    #     telescopeerobservation_payload = {'code': 'XYZ', 'status': 'AVAILABILITY'}
+    #     facility_dict = {'code': 'LCO', 'sites': [ site_dict, ... ]}
+    #     site_dict = {'code': 'XYZ', 'telescopes': [ telescope_dict, ... ]}
+    #     telescope_dict = {'code': 'XYZ', 'status': 'AVAILABILITY'}
     #     Here's an example of the returned dictionary:
     #     literal_facility_status_example = {
     #         'code': 'LCO',
@@ -143,7 +143,7 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
     #             }
     #         ]
     #     }
-    #     :return: facilityerobservation_payload
+    #     :return: facility_dict
     #     """
     #     # make the request to the LCO API for the telescope_states
     #     response = make_request(
