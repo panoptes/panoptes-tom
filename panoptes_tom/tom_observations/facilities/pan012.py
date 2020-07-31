@@ -22,6 +22,7 @@ from tom_targets.models import (
 )
 
 from astropy.utils.iers import conf
+import json
 
 conf.auto_max_age = None
 
@@ -59,23 +60,7 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
                 Div("min_nexp", "exp_time", "priority", "exp_set_size", css_class="col",),
                 css_class="form-row",
             ),
-            Div(Div("period", css_class="col"), css_class="form-row"),
         )
-
-    def _build_target_fields(self):
-        target = Target.objects.get(pk=self.cleaned_data["target_id"])
-        target_fields = {
-            "name": target.name,
-        }
-
-        target_fields["type"] = "ICRS"
-        target_fields["field_ra"] = target.ra
-        target_fields["field_dec"] = target.dec
-        # target_fields['proper_motion_ra'] = target.pm_ra
-        # target_fields['proper_motion_dec'] = target.pm_dec
-        # target_fields['epoch'] = target.epoch
-
-        return target_fields
 
     def observation_payload(self):
         """
@@ -84,14 +69,20 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
         the form into a json string.
         """
         target = Target.objects.get(pk=self.cleaned_data["target_id"])
-
-        return {
+        observation_payload = {
             "target_id": target.id,
-            # "field_ra": target.ra,
-            # "field_dec": target.dec,
             "parameters": self.serialize_parameters(),
-            "target_fields": self._build_target_fields(),
         }
+
+        # params comes as JSON string, so turn it back into a dictionary
+        obs_params = json.loads(observation_payload["parameters"])
+        obs_params["field_ra"] = target.ra
+        obs_params["field_dec"] = target.dec
+
+        # Convert params back into a JSON string
+        observation_payload["parameters"] = json.dumps(obs_params)
+
+        return observation_payload
 
 
 class PanoptesObservationFacility(BaseRoboticObservationFacility):
@@ -205,6 +196,7 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
         return ["IN_PROGRESS", "COMPLETED"]
 
     def submit_observation(self, observation_payload):
+
         print(observation_payload)
 
         return [1]

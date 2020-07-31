@@ -10,7 +10,6 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-# from djangae.settings_base import *
 from dotenv import load_dotenv
 
 import os
@@ -18,7 +17,7 @@ import tempfile
 import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
@@ -29,15 +28,14 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.getenv("DEBUG", default=0))
+DEBUG = int(os.getenv("DEBUG", default=1))
+
+DJANGO_SETTINGS_MODULE = os.getenv("DJANGO_SETTINGS_MODULE")
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    # "djangae",
-    # "djangae.tasks",
-    # "djangae.contrib.security",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -65,7 +63,6 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 MIDDLEWARE = [
-    #  "djangae.contrib.security.middleware.AppEngineSecurityMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -166,8 +163,17 @@ MEDIA_URL = "/data/"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {"console": {"class": "logging.StreamHandler",}},
-    "loggers": {"": {"handlers": ["console"], "level": "INFO"}},
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "debug.log"),
+        },
+    },
+    "loggers": {
+        "django": {"handlers": ["file"], "level": "DEBUG", "propagate": True,},
+        "django.db.backends": {"level": "DEBUG", "handlers": ["console"],},
+    },
 }
 
 # Caching

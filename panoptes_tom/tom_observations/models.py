@@ -1,10 +1,9 @@
 from django.db import models
 import json
 
-from tom_targets.models import Target
+from panoptes_tom.tom_targets.models import Target
 from tom_observations.facility import get_service_class
 from tom_common.hooks import run_hook
-from .facilities.pan012.PanoptesObservationFacilityForm import build_target_fields
 
 
 class ObservationRecord(models.Model):
@@ -53,14 +52,15 @@ class ObservationRecord(models.Model):
     scheduled_end = models.DateTimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    min_nexp = models.IntegerField(min_value=1)
-    exp_time = models.FloatField(
-        min_value=5, widget=models.TextInput(attrs={"placeholder": "Seconds"})
-    )
-    exp_set_size = models.IntegerField(min_value=1)
-    priority = models.FloatField(min_value=0)
 
-    target_fields = ObservationRecord(**build_target_fields())
+    # TODO: Find out how to add additional params to existing model.
+
+    # min_nexp = models.IntegerField(min_value=1)
+    # exp_time = models.FloatField(
+    #     min_value=5, widget=models.TextInput(attrs={"placeholder": "Seconds"})
+    # )
+    # exp_set_size = models.IntegerField(min_value=1)
+    # priority = models.FloatField(min_value=1)
 
     class Meta:
         ordering = ("-created",)
