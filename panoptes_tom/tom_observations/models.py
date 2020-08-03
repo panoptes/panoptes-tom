@@ -30,16 +30,6 @@ class ObservationRecord(models.Model):
     :type created: datetime
     :param modified: The time at which this object was last updated.
     :type modified: datetime
-    :param min_nexp: The minimum number of exposures for a given observation.
-    :type min_nexp: int
-    :param exp_time: Exposure time.
-    :type exp_time: float
-    :param exp_set_size: Number of exposure sets where the minimum number of
-        exposures  must be an integer multiple of the set size.
-    :type exp_set_size: int
-    :param priority: The priority of a given observation.
-    :type priority: float
-
 
     """
 
@@ -52,15 +42,6 @@ class ObservationRecord(models.Model):
     scheduled_end = models.DateTimeField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-
-    # TODO: Find out how to add additional params to existing model.
-
-    # min_nexp = models.IntegerField(min_value=1)
-    # exp_time = models.FloatField(
-    #     min_value=5, widget=models.TextInput(attrs={"placeholder": "Seconds"})
-    # )
-    # exp_set_size = models.IntegerField(min_value=1)
-    # priority = models.FloatField(min_value=1)
 
     class Meta:
         ordering = ("-created",)

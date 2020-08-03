@@ -23,6 +23,7 @@ from tom_targets.models import (
 
 from astropy.utils.iers import conf
 import json
+import copy
 
 conf.auto_max_age = None
 
@@ -62,6 +63,15 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
             ),
         )
 
+    # Overrides existing parameters so that RA and DEC get submitted to the db
+    def serialize_parameters(self):
+        target = Target.objects.get(pk=self.cleaned_data["target_id"])
+        parameters = copy.deepcopy(self.cleaned_data)
+        parameters.pop("groups", None)
+        parameters["field_ra"] = target.ra
+        parameters["field_dec"] = target.dec
+        return json.dumps(parameters)
+
     def observation_payload(self):
         """
         This method is called to extract the data from the form into a dictionary that
@@ -73,14 +83,6 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
             "target_id": target.id,
             "parameters": self.serialize_parameters(),
         }
-
-        # params comes as JSON string, so turn it back into a dictionary
-        obs_params = json.loads(observation_payload["parameters"])
-        obs_params["field_ra"] = target.ra
-        obs_params["field_dec"] = target.dec
-
-        # Convert params back into a JSON string
-        observation_payload["parameters"] = json.dumps(obs_params)
 
         return observation_payload
 
