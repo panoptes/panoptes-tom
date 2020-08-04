@@ -6,18 +6,18 @@ from django.urls import reverse, reverse_lazy
 User = User
 
 
-def user_info(request, pk):
+def user_info(request, id):
     """This returns profile info on a given user.
 
     Args:
         request : A request to view the profile info.
-       pk: A unique identifier corresponding with the given profile.
+       id: A unique identifier corresponding with the given profile.
 
     Returns:
        The profile info page.
     """
     try:
-        user = User.objects.get(pk=pk)
+        user = User.objects.get(id=id)
     except User.DoesNotExist:
         user = None
 

@@ -13,8 +13,7 @@ urlpatterns = [
     path(
         "remoterequests/<slug>/", profile_view, name="profile-view"
     ),  # TODO: Consider renaming slug
-    path("remoterequests/user-profile/<int:pk>/", user_info, name="user-profile"),
-    # path("user-profile/<int:pk>/", user_info, name="user-profile-with-pk"),
+    path("remoterequests/user-profile/<int:id>/", user_info, name="user-profile"),
     path("observation-request/send/<int:id>/", send_obs_request, name="send-obs-request"),
     path("observation-request/cancel/<int:id>/", cancel_obs_request, name="cancel-obs-request"),
     path("observation-request/accept/<int:id>/", accept_obs_request, name="accept-obs-request"),
