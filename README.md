@@ -1,10 +1,6 @@
----
-description: >-
-  A target and observation manager for Project PANOPTES built with the TOM
-  Toolkit.
----
-
 # PANOPTES Observation Portal
+
+A target and observation manager for Project PANOPTES built with the TOM Toolkit.
 
 ## Deployment
 
