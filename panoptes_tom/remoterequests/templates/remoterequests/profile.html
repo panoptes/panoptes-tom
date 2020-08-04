@@ -42,7 +42,7 @@
                         <ul>
                                 {% for observer in remote_observer_list %}
                                 <li>
-                                        <p><a href="{% url 'remoterequests:user-profile' observer.slug %}">{{ observer.user.username }}</a>
+                                        <p><a href="{% url 'remoterequests:user-profile' observer.id %}">{{ observer.user.username }}</a>
                                         </p>
 
                                 </li>
