@@ -1,5 +1,5 @@
 # Table of contents
 
-* [PANOPTES TOM](README.md)
+* [PANOPTES Observation Portal](README.md)
 * [Changelog](changelog.md)
 
