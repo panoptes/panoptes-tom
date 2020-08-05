@@ -101,16 +101,22 @@ WSGI_APPLICATION = "panoptes_tom.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-GOOGLE_CLOUD_CONFIG_KEY = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+# Uncomment the section below to configure a cloud SQL database:
+
+# GOOGLE_CLOUD_CONFIG_KEY = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 DATABASES = {
+    # "default": {
+    #     "ENGINE": os.getenv("SQL_ENGINE"),
+    #     "NAME": os.getenv("SQL_DATABASE"),
+    #     "USER": os.getenv("SQL_USER"),
+    #     "PASSWORD": os.getenv("SQL_PASSWORD"),
+    #     "PORT": os.getenv("SQL_PORT"),
+    #     "HOST": os.getenv("DJANGO_HOST"),
+    # }
     "default": {
         "ENGINE": os.getenv("SQL_ENGINE"),
-        "NAME": os.getenv("SQL_DATABASE"),
-        "USER": os.getenv("SQL_USER"),
-        "PASSWORD": os.getenv("SQL_PASSWORD"),
-        "PORT": os.getenv("SQL_PORT"),
-        "HOST": "127.0.0.1",
+        "NAME": os.path.join(BASE_DIR, os.getenv("SQL_DATABASE")),
     }
 }
 
