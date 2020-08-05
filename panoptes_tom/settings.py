@@ -110,7 +110,7 @@ DATABASES = {
         "USER": os.getenv("SQL_USER"),
         "PASSWORD": os.getenv("SQL_PASSWORD"),
         "PORT": os.getenv("SQL_PORT"),
-        "HOST": "127.0.0.1",
+        "HOST": os.getenv("DJANGO_HOST"),
     }
 }
 
