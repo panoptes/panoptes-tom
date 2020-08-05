@@ -1,6 +1,6 @@
 # PANOPTES Observation Portal
 
-A target and observation manager for [Project PANOPTES](https://github.com/panoptes) built with the [TOM Toolkit](https://tom-toolkit.readthedocs.io/en/stable/index.html).
+A target and observation manager for Project PANOPTES built with the TOM Toolkit.
 
 ## Deployment
 
