@@ -18,6 +18,7 @@ $ source tom_env/bin/activate
 Next, install the necessary packages:
 
 ```text
+$ cd path-to-file/panoptes-tom
 $ pip install -r requirements.txt
 ```
 
@@ -25,10 +26,9 @@ $ pip install -r requirements.txt
 
 To properly configure the project, create a `.env` file with the following information and save it in your project root:
 
-**Create `.env` file:**
+**Create a `.env` file:**
 
 ```bash
-$ cd path-to-file/panoptes-tom
 $ touch .env
 $ gedit .env
 ```
@@ -76,7 +76,7 @@ SQL_PORT=your-port-number
 GOOGLE_APPLICATION_CREDENTIALS=/path/to/your/credentials.json
 ```
 
-Next, uncomment the following lines in `settings.py`:
+Next, uncomment the following lines in `settings.py`as shown below:
 
 ```python
 GOOGLE_CLOUD_CONFIG_KEY = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
