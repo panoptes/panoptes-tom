@@ -1,6 +1,6 @@
 # PANOPTES Observation Portal
 
-A target and observation manager for Project PANOPTES built with the TOM Toolkit.
+A target and observation manager for [Project PANOPTES](https://github.com/panoptes) built with the [TOM Toolkit](https://tom-toolkit.readthedocs.io/en/stable/index.html).
 
 ## Deployment
 
@@ -8,7 +8,7 @@ A prototype observation manager site can be found [here](https://panoptes-tom.he
 
 ## Development
 
-To develop, clone the repo and activate a virtual environment for managing the `panoptes-tom` packages:
+To develop, clone the [repo](https://github.com/panoptes/panoptes-tom) and activate a virtual environment for managing the `panoptes-tom` packages:
 
 ```text
 $ python3 -m venv tom_env/
