@@ -39,7 +39,7 @@ def make_request(*args, **kwargs):
 class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
     name = forms.CharField()
     start = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
-    end = forms.CharField(required=False, widget=forms.TextInput(attrs={"type": "date"}))
+    end = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
 
     min_nexp = forms.IntegerField(initial=60)
     exp_time = forms.FloatField(
