@@ -41,12 +41,12 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
     start = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
     end = forms.CharField(required=False, widget=forms.TextInput(attrs={"type": "date"}))
 
-    min_nexp = forms.IntegerField(min_value=1)
+    min_nexp = forms.IntegerField(initial=60)
     exp_time = forms.FloatField(
-        min_value=5, widget=forms.TextInput(attrs={"placeholder": "Seconds"})
+        initial=120, widget=forms.TextInput(attrs={"placeholder": "Seconds"})
     )
-    exp_set_size = forms.IntegerField(min_value=1)
-    priority = forms.FloatField(min_value=0)
+    exp_set_size = forms.IntegerField(initial=10)
+    priority = forms.FloatField(initial=100)
 
     def __init(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
