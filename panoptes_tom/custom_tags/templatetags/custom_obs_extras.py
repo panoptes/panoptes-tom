@@ -27,7 +27,11 @@ def visibility_params(target, facility, length=7, interval=60, airmass_limit=Non
         for site, data in visibility_data.items()
     ]
     layout = go.Layout(
-        title="Airmass", xaxis=dict(title="Test1"), yaxis=dict(title="Test2", autorange="reversed")
+        title="Visibility Over Time",
+        title_x=0.5,
+        titlefont=dict(size=18),
+        xaxis=dict(title="Time (UTC)", titlefont=dict(size=16)),
+        yaxis=dict(title="Airmass", titlefont=dict(size=16), autorange="reversed"),
     )
     visibility_graph = offline.plot(
         go.Figure(data=plot_data, layout=layout), output_type="div", show_link=False
