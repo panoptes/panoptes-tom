@@ -119,7 +119,6 @@ DATABASES = {
     }
     # Default db config.
     # https://app.gitbook.com/@projectpanoptes/s/panoptes-tom/
-    
     # "default": {
     #     "ENGINE": os.getenv("SQL_ENGINE"),
     #     "NAME": os.path.join(BASE_DIR, os.getenv("SQL_DATABASE")),
@@ -228,6 +227,8 @@ TOM_LATEX_PROCESSORS = {
 
 TOM_FACILITY_CLASSES = [
     "panoptes_tom.tom_observations.facilities.pan012.PanoptesObservationFacility",
+    "panoptes_tom.tom_observations.facilities.pan018.PanoptesObservationFacility",
+    "panoptes_tom.tom_observations.facilities.pan001.PanoptesObservationFacility",
 ]
 
 # Define extra target fields here. Types can be any of "number", "string", "boolean" or "datetime"
