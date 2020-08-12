@@ -2,7 +2,7 @@
 
 ## 0.0.1dev 
 
-### Addeed
+### Added
 
 * Initial creation of repo.
 

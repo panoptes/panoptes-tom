@@ -15,6 +15,8 @@ from dotenv import load_dotenv
 import os
 import tempfile
 import django_heroku
+import logging
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
@@ -58,6 +60,7 @@ INSTALLED_APPS = [
     "tom_dataproducts",
     "tom_publications",
     "panoptes_tom.remoterequests.apps.RemoterequestsConfig",
+    "panoptes_tom.custom_tags.apps.CustomTagsConfig",
 ]
 
 SITE_ID = 1
@@ -101,6 +104,8 @@ WSGI_APPLICATION = "panoptes_tom.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+
+# Use the config below if you're setting up a cloud db, otherwise comment it out.
 GOOGLE_CLOUD_CONFIG_KEY = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 DATABASES = {
@@ -110,8 +115,14 @@ DATABASES = {
         "USER": os.getenv("SQL_USER"),
         "PASSWORD": os.getenv("SQL_PASSWORD"),
         "PORT": os.getenv("SQL_PORT"),
-        "HOST": "127.0.0.1",
+        "HOST": os.getenv("DJANGO_HOST"),
     }
+    # Default db config.
+    # https://app.gitbook.com/@projectpanoptes/s/panoptes-tom/
+    # "default": {
+    #     "ENGINE": os.getenv("SQL_ENGINE"),
+    #     "NAME": os.path.join(BASE_DIR, os.getenv("SQL_DATABASE")),
+    # }
 }
 
 
@@ -163,16 +174,21 @@ MEDIA_URL = "/data/"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
+    "loggers": {
+        "django": {"handlers": ["file", "console"], "level": "DEBUG", "propagate": True,},
+        "django.db.backends": {"level": "DEBUG", "handlers": ["file"],},
+    },
     "handlers": {
         "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": os.path.join(BASE_DIR, "debug.log"),
+            "filename": os.path.join(BASE_DIR, "logs/debug.log"),
+            "formatter": "default",
         },
+        "console": {"level": "WARNING", "class": "logging.StreamHandler", "formatter": "default",},
     },
-    "loggers": {
-        "django": {"handlers": ["file"], "level": "DEBUG", "propagate": True,},
-        "django.db.backends": {"level": "DEBUG", "handlers": ["console"],},
+    "formatters": {
+        "default": {"format": "{levelname} {asctime} {module} {message}", "style": "{",}
     },
 }
 
@@ -211,6 +227,8 @@ TOM_LATEX_PROCESSORS = {
 
 TOM_FACILITY_CLASSES = [
     "panoptes_tom.tom_observations.facilities.pan012.PanoptesObservationFacility",
+    "panoptes_tom.tom_observations.facilities.pan018.PanoptesObservationFacility",
+    "panoptes_tom.tom_observations.facilities.pan001.PanoptesObservationFacility",
 ]
 
 # Define extra target fields here. Types can be any of "number", "string", "boolean" or "datetime"
