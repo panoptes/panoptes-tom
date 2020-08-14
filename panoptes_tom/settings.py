@@ -136,7 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
-
+LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
@@ -260,6 +260,14 @@ HOOKS = {
     "target_post_save": "tom_common.hooks.target_post_save",
     "observation_change_state": "tom_common.hooks.observation_change_state",
     "data_product_post_upload": "tom_dataproducts.hooks.data_product_post_upload",
+}
+
+# Rest Framework
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [],
+    "TEST_REQUEST_DEFAULT_FORMAT": "json",
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 100,
 }
 
 AUTO_THUMBNAILS = False
