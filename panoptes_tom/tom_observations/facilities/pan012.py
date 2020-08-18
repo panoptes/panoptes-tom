@@ -21,6 +21,8 @@ from tom_targets.models import (
     REQUIRED_NON_SIDEREAL_FIELDS_PER_SCHEME,
 )
 
+from tom_observations.models import ObservationRecord
+
 from astropy.utils.iers import conf
 import json
 import copy
@@ -36,7 +38,15 @@ def make_request(*args, **kwargs):
     return response
 
 
+# TODO: Determine where I'm going to call this function, how to pass in 'request' as an argument.
+def get_email(request):
+    observationrecord = ObservationRecord()
+    observationrecord.email = request.user.username.email
+    return observationrecord.email
+
+
 class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
+
     name = forms.CharField()
     start = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
     end = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
@@ -78,6 +88,7 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
         can be used by the rest of the module. In the base implementation it simply dumps
         the form into a json string.
         """
+
         target = Target.objects.get(pk=self.cleaned_data["target_id"])
         observation_payload = {
             "target_id": target.id,
@@ -199,9 +210,13 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
 
     def submit_observation(self, observation_payload):
 
+        observationrecord = ObservationRecord()
+        observationrecord.email = "foo@foo.com"
+
         print(observation_payload)
 
         return [1]
 
     def validate_observation(self, observation_payload):
         pass
+

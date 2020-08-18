@@ -1,0 +1,8 @@
+{% load i18n %}
+{% autoescape off %}{% blocktrans %} Hi from PANOPTES Observation Portal!
+
+The observation {{ observation }} is in progress.
+
+{% endblocktrans %}{% endautoescape %}
+{% blocktrans %} Thank you from {{ site_name }}!
+{{ site_domain }}{% endblocktrans %}
