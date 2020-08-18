@@ -210,9 +210,6 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
 
     def submit_observation(self, observation_payload):
 
-        observationrecord = ObservationRecord()
-        observationrecord.email = "foo@foo.com"
-
         print(observation_payload)
 
         return [1]
