@@ -145,6 +145,9 @@ AUTHENTICATION_BACKENDS = (
     "guardian.backends.ObjectPermissionBackend",
 )
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+DEFAULT_FROM_EMAIL = "admin@panoptesobservationportal.com"
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -174,22 +177,8 @@ MEDIA_URL = "/data/"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "loggers": {
-        "django": {"handlers": ["file", "console"], "level": "DEBUG", "propagate": True,},
-        "django.db.backends": {"level": "DEBUG", "handlers": ["file"],},
-    },
-    "handlers": {
-        "file": {
-            "level": "DEBUG",
-            "class": "logging.FileHandler",
-            "filename": os.path.join(BASE_DIR, "logs/debug.log"),
-            "formatter": "default",
-        },
-        "console": {"level": "WARNING", "class": "logging.StreamHandler", "formatter": "default",},
-    },
-    "formatters": {
-        "default": {"format": "{levelname} {asctime} {module} {message}", "style": "{",}
-    },
+    "handlers": {"console": {"class": "logging.StreamHandler",}},
+    "loggers": {"logging": {"handlers": ["console"], "level": "INFO"}},
 }
 
 # Caching
@@ -258,8 +247,8 @@ OPEN_URLS = []
 
 HOOKS = {
     "target_post_save": "tom_common.hooks.target_post_save",
-    "observation_change_state": "tom_common.hooks.observation_change_state",
     "data_product_post_upload": "tom_dataproducts.hooks.data_product_post_upload",
+    "observation_change_state": "panoptes_tom.tom_observations.hooks.observation_change_state",
 }
 
 # Rest Framework

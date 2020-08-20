@@ -37,6 +37,7 @@ def make_request(*args, **kwargs):
 
 
 class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
+
     name = forms.CharField()
     start = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
     end = forms.CharField(widget=forms.TextInput(attrs={"type": "date"}))
@@ -78,6 +79,7 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
         can be used by the rest of the module. In the base implementation it simply dumps
         the form into a json string.
         """
+
         target = Target.objects.get(pk=self.cleaned_data["target_id"])
         observation_payload = {
             "target_id": target.id,
@@ -90,7 +92,6 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
 class PanoptesObservationFacility(BaseRoboticObservationFacility):
 
     name = "PAN012"
-    observation_types = [("OBSERVATION", "Custom Observation")]
     # The SITES dictionary is used to calculate visibility intervals in the
     # planning tool. All entries should contain latitude, longitude, elevation
     # and a code.
@@ -103,6 +104,8 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
             "elevation": 1700,
         }
     }
+
+    observation_forms = {"OBSERVATION": PanoptesObservationFacilityForm}
 
     def data_products(self, observation_id, product_id=None):
         return []
@@ -205,3 +208,4 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
 
     def validate_observation(self, observation_payload):
         pass
+

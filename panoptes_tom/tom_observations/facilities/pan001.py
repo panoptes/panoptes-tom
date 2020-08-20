@@ -90,7 +90,6 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
 class PanoptesObservationFacility(BaseRoboticObservationFacility):
 
     name = "PAN001"
-    observation_types = [("OBSERVATION", "Custom Observation")]
     # The SITES dictionary is used to calculate visibility intervals in the
     # planning tool. All entries should contain latitude, longitude, elevation
     # and a code.
@@ -103,6 +102,8 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
             "elevation": 3400,
         }
     }
+
+    observation_forms = {"OBSERVATION": PanoptesObservationFacilityForm}
 
     def data_products(self, observation_id, product_id=None):
         return []
