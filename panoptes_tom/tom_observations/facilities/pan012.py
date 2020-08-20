@@ -21,8 +21,6 @@ from tom_targets.models import (
     REQUIRED_NON_SIDEREAL_FIELDS_PER_SCHEME,
 )
 
-from tom_observations.models import ObservationRecord
-
 from astropy.utils.iers import conf
 import json
 import copy
@@ -36,13 +34,6 @@ def make_request(*args, **kwargs):
         raise ImproperCredentialsException("PAN: " + str(response.content))
     response.raise_for_status()
     return response
-
-
-# TODO: Determine where I'm going to call this function, how to pass in 'request' as an argument.
-def get_email(request):
-    observationrecord = ObservationRecord()
-    observationrecord.email = request.user.username.email
-    return observationrecord.email
 
 
 class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
@@ -101,7 +92,6 @@ class PanoptesObservationFacilityForm(BaseRoboticObservationForm):
 class PanoptesObservationFacility(BaseRoboticObservationFacility):
 
     name = "PAN012"
-    observation_types = [("OBSERVATION", "Custom Observation")]
     # The SITES dictionary is used to calculate visibility intervals in the
     # planning tool. All entries should contain latitude, longitude, elevation
     # and a code.
@@ -114,6 +104,8 @@ class PanoptesObservationFacility(BaseRoboticObservationFacility):
             "elevation": 1700,
         }
     }
+
+    observation_forms = {"OBSERVATION": PanoptesObservationFacilityForm}
 
     def data_products(self, observation_id, product_id=None):
         return []

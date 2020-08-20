@@ -1,1 +1,0 @@
-{% load i18n %}{% autoescape off %}{% blocktrans %}Observation Complete{% endblocktrans %}{% endautoescape %}

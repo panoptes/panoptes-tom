@@ -1,9 +1,5 @@
 {% load i18n %}
-{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hi from {{ site_name }}!
+{% autoescape off %}{% blocktrans %} Hi from PANOPTES Observation Portal!
 
-The observation {{ observation }} has completed.
-
+The observation {{ observation}} has completed.
 {% endblocktrans %}{% endautoescape %}
-{% blocktrans with site_name=current_site.name site_domain=current_site
-.domain %}Thank you from {{ site_name }}!
-{{ site_domain }}{% endblocktrans %}

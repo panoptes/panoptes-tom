@@ -14,9 +14,14 @@
     <div class="col-md-4">
         {% target_data target %}
     </div>
-    <div class="col-md-8">
-        {% observation_type_tabs %}
-        {% crispy form %}
+    <div class="col-md-7">
+        <div class=" tab-content">
+            {% for observation_type, observation_form in observation_type_choices %}
+            <div class="tab-pane {% if observation_type == active or not active and forloop.first %}active{% endif %}"
+                id="{{ observation_type }}">
+                {% crispy observation_form %}
+            </div>
+            {% endfor %}
+        </div>
     </div>
-</div>
-{% endblock %}
+    {% endblock %}

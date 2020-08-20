@@ -24,7 +24,7 @@ def observation_change_state(observation, previous_status):
                 context={"observation": observation},
             ),
             from_email=None,
-            recipient_list=[observation.email],
+            recipient_list=[observation.user.email],
             fail_silently=False,
         )
 
@@ -42,6 +42,6 @@ def observation_change_state(observation, previous_status):
                 context={"observation": observation},
             ),
             from_email=None,
-            recipient_list=[observation.email],
+            recipient_list=[observation.user.email],
             fail_silently=False,
         )
