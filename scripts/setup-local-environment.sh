@@ -10,23 +10,15 @@ echo "Removing stale docker images to make space"
 docker system prune --force
 
 echo "Building local panoptes-tom"
-. "${TOMDIR}/Docker/setup-local-environment.sh"
-
-
-# In the local develop we need to pass git to the docker build context.
-#sed -i s'/^\.git$/\!\.git/' .dockerignore
+cd "${TOMDIR}"
 
 echo "Building local panoptes-tom:latest from panoptes-utils:latest"
 docker build \
     --quiet --force-rm \
     --build-arg IMAGE_URL="panoptes-utils:latest" \
     -t "panoptes-tom:latest" \
-    -f "${TOMDIR}/Docker/latest.Dockerfile" \
+    -f "${TOMDIR}/Dockerfile" \
     "${TOMDIR}"
-
-
-# Revert our .dockerignore changes.
-#sed -i s'/^!\.git$/\.git/' .dockerignore
 
 docker system prune --force
 
