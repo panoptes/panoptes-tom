@@ -20,14 +20,12 @@ django-contrib-comments==1.9.2
 django-crispy-forms==1.9.2
 django-extensions==3.0.5
 django-filter==2.3.0
-django-firebase-orm==0.3
 django-gravatar2==1.4.4
 django-guardian==2.3.0
 django-heroku==0.3.1
 djangorestframework==3.11.1
 factory-boy==2.12.0
 Faker==0.9.1
-firebase-admin==4.3.0
 fits2image==0.4.3
 fs==2.4.11
 gae-sdk-path-fixer==0.1.2
