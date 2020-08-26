@@ -29,10 +29,8 @@ COPY . ${TOMDIR}
 EXPOSE ${PORT}
 
 
-# #copy entrypoint.sh
-# COPY ./resources/entrypoint.sh ${TOMDIR}
-RUN chmod +x ./scripts/resources/entrypoint.sh
-
+#copy entrypoint.sh
+COPY ./scripts/resources/entrypoint.sh ${TOMDIR}
 
 # run entrypoint.sh
 ENTRYPOINT ["/bin/sh", "/home/jzonkey/Documents/panoptes-tom/scripts/resources/entrypoint.sh"]

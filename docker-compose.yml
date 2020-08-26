@@ -16,7 +16,7 @@ services:
     tom_postgres_db:
         image: gcr.io/cloudsql-docker/gce-proxy:1.16
         ports:
-            - "3306"
+            - 3306:3306
         command: ./cloud_sql_proxy -instances=${INSTANCE_CONNECTION_NAME}=tcp:0.0.0.0:3306 -credential_file=/config
         volumes:
         - ${GOOGLE_APPLICATION_CREDENTIALS}:/config
