@@ -1,7 +1,6 @@
 FROM gcr.io/panoptes-exp/panoptes-utils:latest
 
-ARG tomdir=/home/jzonkey/Documents/panoptes-tom
-ARG port=8000
+ARG port=8080
 
 ENV TOMDIR $tomdir
 ENV PYTHONUNBUFFERED 1
@@ -10,27 +9,28 @@ ENV PORT $port
 
 USER root
 
-WORKDIR ${TOMDIR}
+RUN mkdir /app
+WORKDIR /app
 
 # Observation Portal requirements
 
-COPY ./scripts/resources/requirements.txt ${TOMDIR}
+COPY ./scripts/resources/requirements.txt /app/
 RUN apt-get update && \
-    apt-get install -y python3-pip python-dev libpq-dev && \
+    apt-get install -y python3-pip python-dev libpq-dev netcat && \
     pip3 install -U pip && \
     pip3 install --no-cache-dir -r requirements.txt
 
 RUN apt-get autoremove --purge && \
     apt-get -y clean
 
-COPY . ${TOMDIR}
+COPY ./ /app/
 
 # Define network port
 EXPOSE ${PORT}
 
 
 #copy entrypoint.sh
-COPY ./scripts/resources/entrypoint.sh ${TOMDIR}
+COPY ./scripts/resources/entrypoint.sh /app/
 
 # run entrypoint.sh
-ENTRYPOINT ["/bin/sh", "/home/jzonkey/Documents/panoptes-tom/scripts/resources/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/app/scripts/resources/entrypoint.sh"]
