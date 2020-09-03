@@ -23,14 +23,11 @@ RUN apt-get update && \
 RUN apt-get autoremove --purge && \
     apt-get -y clean
 
-COPY ./ /app/
+COPY . /app/
 
 # Define network port
 EXPOSE ${PORT}
 
-
-#copy entrypoint.sh
-COPY ./scripts/resources/entrypoint.sh /app/
 
 # run entrypoint.sh
 ENTRYPOINT ["/bin/sh", "/app/scripts/resources/entrypoint.sh"]
