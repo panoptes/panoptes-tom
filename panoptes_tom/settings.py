@@ -34,6 +34,8 @@ DEBUG = int(os.getenv("DEBUG", default=1))
 
 DJANGO_SETTINGS_MODULE = os.getenv("DJANGO_SETTINGS_MODULE")
 
+ALLOWED_HOSTS = ["localhost"]
+
 
 # Application definition
 
