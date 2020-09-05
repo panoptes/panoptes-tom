@@ -5,7 +5,7 @@ services:
         build: .
         depends_on:
             - tom_postgres_db
-        command: python3 manage.py runserver localhost:8080
+        command: python3 manage.py runserver 0.0.0.0:8080
         volumes:
             - .:/app
         ports:
