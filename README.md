@@ -12,4 +12,5 @@ See [Feature Development Process](https://app.gitbook.com/@projectpanoptes/s/pan
 
 ## Install
 
-Coming Soon!
+Coming Soon! With awesome new features!
+
