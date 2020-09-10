@@ -4,7 +4,7 @@
 * [Code of Conduct](code-of-conduct.md)
 * [Changelog](changelog.md)
 
-## Development <a id="docs"></a>
+## Documentation <a id="docs"></a>
 
 * [Feature Development Process](docs/feature-development-process/README.md)
   * [One Time Setup](docs/feature-development-process/one-time-setup.md)
