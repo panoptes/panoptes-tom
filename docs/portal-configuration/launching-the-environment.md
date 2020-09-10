@@ -6,10 +6,10 @@ The portal development environment can be launched from a [Docker](https://docs.
  To learn more about Docker, see the [PANOPTES Docker Overview](https://app.gitbook.com/@projectpanoptes/s/pocs-user-guide/building/software/addendum-docker-overview) or check out this [Docker Basics](https://vsupalov.com/6-docker-basics/) guide. 
 {% endhint %}
 
-To launch the container, make sure you are in your project root directory: 
+To launch the container, make sure you are in your project root directory, which by default would be located in `PANDIR=/var/panoptes`:
 
 ```
-$ cd path-to-dir/panoptes-tom
+$ cd $PANDIR/panoptes-tom
 ```
 
 Then, run the `setup-local-environment` script:
