@@ -12,5 +12,5 @@ See [Feature Development Process](https://app.gitbook.com/@projectpanoptes/s/pan
 
 ## Install
 
-Coming Soon! With awesome new features!
+See the [Installation Page](docs/install.md) for details.
 

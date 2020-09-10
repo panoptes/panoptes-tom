@@ -6,6 +6,7 @@
 
 ## Documentation <a id="docs"></a>
 
+* [Install](docs/install.md)
 * [Feature Development Process](docs/feature-development-process/README.md)
   * [One Time Setup](docs/feature-development-process/one-time-setup.md)
 * [Portal Configuration](docs/portal-configuration/README.md)
