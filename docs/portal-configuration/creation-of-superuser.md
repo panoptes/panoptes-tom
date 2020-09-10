@@ -3,6 +3,7 @@
 To gain admin privileges to your Django project, you must create a superuser account from within the running Docker container: 
 
 ```
+# 
 $ docker exec -it --user panoptes docker_web_1 /bin/zsh
 
 # Inside the container:

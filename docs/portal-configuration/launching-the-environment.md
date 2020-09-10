@@ -15,7 +15,7 @@ $ cd path-to-dir/panoptes-tom
 Then, run the `setup-local-environment` script:
 
 ```
-$ bash scripts/setup-local-environment.sh
+$ bash INCLUDE_BASE-true scripts/setup-local-environment.sh
 ```
 
 This will build a Docker image from the requirements specified within the `Dockerfile` in your project root. 
@@ -25,13 +25,13 @@ You can verify that your image has been built by entering `docker image ls` in y
 ```
 $ docker image ls
 REPOSITORY                           TAG                 IMAGE ID            CREATED             SIZE
-panoptes-tom                         latest              5ef7449ecc75        2 minutes ago       2.47GB
+panoptes-tom                         develop             5ef7449ecc75        2 minutes ago       2.47GB
 ```
 
 Next, run:
 
 ```
-$ docker-compose up -d
+$ docker-compose -f docker/docker-compose.yaml up -d
 ```
 
 This will launch a Docker container based on your image. By specifying `-d` , the container will start up in detached mode. Detached mode runs containers in the background.
