@@ -19,15 +19,23 @@ By default, the observation portal is configured to run a [Cloud SQL ](https://c
 
 ```text
 DEBUG=1
+
 DJANGO_SETTINGS_MODULE=panoptes_tom.settings
+
 SECRET_KEY="dkn94osg(gj*9wr=pa1a^-h__f%5_vb8h!8^9u%f(!m-ysb^1-"
-DJANGO_HOST=my_db
-GOOGLE_APPLICATION_CREDENTIALS=path-to-credentials
-INSTANCE_CONNECTION_NAME=<YOUR_INSTANCE_NAME>
 SQL_ENGINE=django.db.backends.postgresql
-SQL_DATABASE=my_db
-SQL_USER=my-username
-SQL_PASSWORD=my-password
+
+DJANGO_HOST=<DJANGO_HOST>
+SQL_DATABASE=<SQL_DATABASE>
+
+# If using authentication
+SQL_USER=<SQL_USER>
+SQL_PASSWORD=<SQL_PASSWORD>
 SQL_PORT=3306
+
+# If using Cloud SQL uncomment following
+# GOOGLE_APPLICATION_CREDENTIALS=<PATH_TO_CREDENTIALS>
+# INSTANCE_CONNECTION_NAME=<YOUR_INSTANCE_NAME>
+
 ```
 
