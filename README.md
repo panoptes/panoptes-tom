@@ -10,3 +10,6 @@ A prototype observation manager site can be found [here](https://panoptes-tom.he
 
 See [Feature Development Process](https://app.gitbook.com/@projectpanoptes/s/panoptes-tom/~/drafts/-MEYlQRt38StGT9e-lzj/feature-development-process).
 
+## Install
+
+Coming Soon!
