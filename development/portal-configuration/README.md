@@ -23,7 +23,7 @@ DJANGO_SETTINGS_MODULE=panoptes_tom.settings
 SECRET_KEY="dkn94osg(gj*9wr=pa1a^-h__f%5_vb8h!8^9u%f(!m-ysb^1-"
 DJANGO_HOST=my_db
 GOOGLE_APPLICATION_CREDENTIALS=path-to-credentials
-INSTANCE_CONNECTION_NAME=your-connection-name
+INSTANCE_CONNECTION_NAME=<YOUR_INSTANCE_NAME>
 SQL_ENGINE=django.db.backends.postgresql
 SQL_DATABASE=my_db
 SQL_USER=my-username
