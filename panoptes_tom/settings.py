@@ -17,7 +17,6 @@ import tempfile
 import django_heroku
 import logging
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
 
@@ -35,7 +34,6 @@ DEBUG = int(os.getenv("DEBUG", default=1))
 DJANGO_SETTINGS_MODULE = os.getenv("DJANGO_SETTINGS_MODULE")
 
 ALLOWED_HOSTS = ["localhost"]
-
 
 # Application definition
 
@@ -102,7 +100,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 WSGI_APPLICATION = "panoptes_tom.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -111,7 +108,13 @@ WSGI_APPLICATION = "panoptes_tom.wsgi.application"
 GOOGLE_CLOUD_CONFIG_KEY = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 DATABASES = {
+    # Default db config.
+    # https://app.gitbook.com/@projectpanoptes/s/panoptes-tom/
     "default": {
+        "ENGINE": os.getenv("SQL_ENGINE"),
+        "NAME": os.path.join(BASE_DIR, os.getenv("SQL_DATABASE")),
+    },
+    "cloudsql": {
         "ENGINE": os.getenv("SQL_ENGINE"),
         "NAME": os.getenv("SQL_DATABASE"),
         "USER": os.getenv("SQL_USER"),
@@ -119,23 +122,16 @@ DATABASES = {
         "PORT": os.getenv("SQL_PORT"),
         "HOST": os.getenv("DJANGO_HOST"),
     }
-    # Default db config.
-    # https://app.gitbook.com/@projectpanoptes/s/panoptes-tom/
-    # "default": {
-    #     "ENGINE": os.getenv("SQL_ENGINE"),
-    #     "NAME": os.path.join(BASE_DIR, os.getenv("SQL_DATABASE")),
-    # }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator", },
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 
 LOGIN_URL = "/accounts/login/"
@@ -166,12 +162,11 @@ USE_TZ = True
 DATETIME_FORMAT = "Y-m-d H:m:s"
 DATE_FORMAT = "Y-m-d"
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = "https://storage.googleapis.com/tom-static-files/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = "/static"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 MEDIA_ROOT = os.path.join(BASE_DIR, "data")
 MEDIA_URL = "/data/"
@@ -179,7 +174,7 @@ MEDIA_URL = "/data/"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "handlers": {"console": {"class": "logging.StreamHandler",}},
+    "handlers": {"console": {"class": "logging.StreamHandler", }},
     "loggers": {"logging": {"handlers": ["console"], "level": "INFO"}},
 }
 
@@ -195,7 +190,6 @@ CACHES = {
 
 # TOM Specific configuration
 TARGET_TYPE = "SIDEREAL"
-
 
 # Define the valid data product types for your TOM. Be careful when removing items, as previously valid types will no
 # longer be valid, and may cause issues unless the offending records are modified.
