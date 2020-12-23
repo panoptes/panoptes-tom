@@ -116,6 +116,7 @@ venv.bak/
 # Spyder project settings
 .spyderproject
 .spyproject
+.idea
 
 # Rope project settings
 .ropeproject
@@ -138,17 +139,8 @@ dmypy.json
 cython_debug/
 
 # Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-firebase-debug.log*
-
-# Firebase cache
-.firebase/
-
-# Firebase config
+logs/**
+**/*.log
 
 # Uncomment this if you'd like others to create their own Firebase project.
 # For a team working on the same Firebase project(s), it is recommended to leave
@@ -200,5 +192,5 @@ node_modules/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
+# Default sqlite3 database name
+tom_postgres_db
