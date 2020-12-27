@@ -105,7 +105,7 @@ WSGI_APPLICATION = "panoptes_tom.wsgi.application"
 
 
 # Use the config below if you're setting up a cloud db, otherwise comment it out.
-GOOGLE_CLOUD_CONFIG_KEY = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+# GOOGLE_CLOUD_CONFIG_KEY = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 DATABASES = {
     # Default db config.
@@ -114,14 +114,14 @@ DATABASES = {
         "ENGINE": os.getenv("SQL_ENGINE"),
         "NAME": os.path.join(BASE_DIR, os.getenv("SQL_DATABASE")),
     },
-    "cloudsql": {
-        "ENGINE": os.getenv("SQL_ENGINE"),
-        "NAME": os.getenv("SQL_DATABASE"),
-        "USER": os.getenv("SQL_USER"),
-        "PASSWORD": os.getenv("SQL_PASSWORD"),
-        "PORT": os.getenv("SQL_PORT"),
-        "HOST": os.getenv("DJANGO_HOST"),
-    }
+    # "cloudsql": {
+    #     "ENGINE": os.getenv("SQL_ENGINE"),
+    #     "NAME": os.getenv("SQL_DATABASE"),
+    #     "USER": os.getenv("SQL_USER"),
+    #     "PASSWORD": os.getenv("SQL_PASSWORD"),
+    #     "PORT": os.getenv("SQL_PORT"),
+    #     "HOST": os.getenv("DJANGO_HOST"),
+    # }
 }
 
 # Password validation
