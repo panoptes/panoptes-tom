@@ -15,7 +15,7 @@ $ cd $PANDIR/panoptes-tom
 Then, run the `setup-local-environment` script:
 
 ```
-$ bash INCLUDE_BASE-true scripts/setup-local-environment.sh
+$ bash scripts/setup-local-environment.sh
 ```
 
 This will build a Docker image from the requirements specified within the `Dockerfile` in your project root. 

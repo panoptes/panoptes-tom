@@ -31,7 +31,8 @@ SQL_ENGINE=django.db.backends.sqlite3
 DJANGO_HOST=<DJANGO_HOST>
 
 # Change the db name for CloudSQL.
-SQL_DATABASE=tom_postgres_db
+# SQL_DATABASE=tom_postgres_db
+SQL_DATABASE=db.sqlite3
 
 # If using authentication (required for CloudSQL).
 # SQL_USER=<SQL_USER>
